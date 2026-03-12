@@ -1,4 +1,4 @@
-# Verilog-Traffic-Light-Controller-using-Finite-State-Machine-FSM-
+
 # Traffic Light Controller (Verilog FSM)
 
 ## Overview
