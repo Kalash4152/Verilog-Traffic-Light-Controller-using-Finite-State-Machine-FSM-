@@ -31,5 +31,113 @@ S0 | Red | Green |
 S1 | Red | Yellow |
 S2 | Green | Red |
 S3 | Yellow | Red |
+# Elevator Controller using Verilog FSM
+
+## Overview
+This project implements a **simple Elevator Control System using Verilog** based on a **Finite State Machine (FSM)** model. The controller manages elevator movement between four floors based on user input while controlling door operations.
+
+The design demonstrates fundamental RTL design concepts including:
+
+- Finite State Machine design
+- Sequential logic using registers
+- Conditional control logic
+- Elevator movement decision logic
+- Door control logic
+- Verilog simulation and waveform verification
+
+---
+
+## System Description
+
+The elevator operates between **four floors (0–3)**.  
+Users select a floor using a **2-bit input signal**.
+
+The controller determines:
+
+- whether the elevator should **move up**
+- **move down**
+- **stay at the current floor**
+
+It also controls the **door opening and closing** when the elevator reaches the requested floor.
+
+---
+
+## Inputs
+
+| Signal | Description |
+|------|-------------|
+| `clk` | System clock |
+| `rst` | Reset signal |
+| `user_choice[1:0]` | Requested floor from user |
+
+---
+
+## Outputs
+
+| Signal | Description |
+|------|-------------|
+| `move_up` | Elevator moves upward |
+| `move_down` | Elevator moves downward |
+| `stay` | Elevator remains at current floor |
+| `door_open` | Elevator door opens |
+| `door_close` | Elevator door closes |
+
+---
+
+## Elevator Logic
+
+The controller compares the **current floor (`pr_floor`)** with the **requested floor (`user_choice`)**.
+
+| Condition | Action |
+|----------|--------|
+| `pr_floor < user_choice` | Elevator moves up |
+| `pr_floor > user_choice` | Elevator moves down |
+| `pr_floor == user_choice` | Elevator stays and door opens |
+
+Door behavior:
+
+- Door opens when the elevator reaches the requested floor
+- Door closes when moving between floors
+
+---
+
+## Floor Encoding
+
+| Floor | Binary |
+|------|-------|
+| Floor 0 | `00` |
+| Floor 1 | `01` |
+| Floor 2 | `10` |
+| Floor 3 | `11` |
+
+---
+
+## Simulation Waveform
+
+The waveform below shows the behavior of the elevator controller during simulation.
+
+The signals illustrate:
+
+- clock operation
+- user floor requests
+- elevator movement decisions
+- door opening and closing
+
+<br><br>
+
+
+
+<br><br>
+
+
+### Waveform Behavior Explanation
+
+When a user selects a floor using `user_choice`, the controller compares it with the current elevator floor.  
+If the requested floor is higher, the `move_up` signal activates. If it is lower, the `move_down` signal activates. Once the elevator reaches the requested floor, the system asserts `stay` and opens the door (`door_open = 1`) while disabling movement signals.
+
+---
+
+## Repository Structure
+
 
 State transition cycle:
